@@ -44,47 +44,49 @@ export default function Home() {
     <main className="bg-white text-[#10211e]">
 
       {/* HERO SECTION */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 py-20 px-6">
-        <div className="absolute top-20 left-6 w-3 h-3 bg-[#fc4139] rounded-full"></div>
-        <div className="absolute bottom-24 right-6 w-2 h-2 bg-[#10211e] rounded-full"></div>
-        <div className="absolute top-40 right-20 w-3 h-3 bg-orange-300 rounded-full"></div>
-        <svg className="absolute bottom-0 left-0 w-full opacity-40" viewBox="0 0 1000 200">
-          <path d="M0 150 Q400 0 800 120 T1200 150" stroke="#fc4139" strokeWidth="4" fill="transparent" />
-        </svg>
+<section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 py-20 px-6">
+  {/* BACKGROUND DECORATIONS - Added z-0 to keep them behind */}
+  <div className="absolute top-20 left-6 w-3 h-3 bg-[#fc4139] rounded-full z-0"></div>
+  <div className="absolute bottom-24 right-6 w-2 h-2 bg-[#10211e] rounded-full z-0"></div>
+  <div className="absolute top-40 right-20 w-3 h-3 bg-orange-300 rounded-full z-0"></div>
+  <svg className="absolute bottom-0 left-0 w-full opacity-40 z-0" viewBox="0 0 1000 200">
+    <path d="M0 150 Q400 0 800 120 T1200 150" stroke="#fc4139" strokeWidth="4" fill="transparent" />
+  </svg>
 
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          {/* LEFT CONTENT */}
-          <div>
-            <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6 }}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-[#10211e]"
-            >
-              Pitch Your Startup to <span className="text-[#fc4139]">India’s Top Investors</span>
-            </motion.h1>
+  {/* MAIN CONTENT - Added relative and z-10 to stay above the SVG/Dots */}
+  <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center relative z-10">
+    
+    {/* LEFT CONTENT */}
+    <div>
+      <motion.h1
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-[#10211e]"
+      >
+        Pitch Your Startup to <span className="text-[#fc4139]">India’s Top Investors</span>
+      </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="mt-6 text-lg text-gray-600 max-w-xl"
-            >
-              Karo Pitch connects founders from across India with investors, giving startups the opportunity to present their ideas and raise funding.
-            </motion.p>
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.3, duration: 0.6 }}
+        className="mt-6 text-lg text-gray-600 max-w-xl"
+      >
+        Karo Pitch connects founders from across India with investors, giving startups the opportunity to present their ideas and raise funding.
+      </motion.p>
 
-            {/* Buttons */}
-             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="flex flex-wrap gap-10 "
-            >
-            <div className="flex gap-4 mt-8 flex-wrap">
-              <motion.button
+      {/* BUTTONS - Wrapping with motion.div for entry, using motion.button for hover */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.5, duration: 0.6 }}
+        className="flex flex-wrap gap-4 mt-8"
+      >
+        <motion.button
                 whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(252,65,57,0.5)" }}
                 className="bg-[#fc4139] text-white px-8 py-3 rounded-lg font-semibold transition"
               >
@@ -97,54 +99,55 @@ export default function Home() {
               >
                 Explore Startups
               </motion.button>
-            </div></motion.div>
+      </motion.div>
 
-            {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="flex flex-wrap gap-10 mt-12"
-            >
-              <div>
-                <p className="text-2xl font-bold text-[#fc4139]">5000+</p>
-                <p className="text-gray-500 text-sm">Startups</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-[#fc4139]">200+</p>
-                <p className="text-gray-500 text-sm">Investors</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-[#fc4139]">10K+</p>
-                <p className="text-gray-500 text-sm">Community</p>
-              </div>
-            </motion.div>
-          </div>
-
-          {/* RIGHT IMAGE */}
-          <div className="relative flex justify-center items-center">
-            <div className="absolute w-64 h-64 md:w-[420px] md:h-[420px] rounded-full bg-[#fc4139]/20 blur-3xl"></div>
-            <div className="absolute -top-10 -right-10 w-40 h-40 md:w-[200px] md:h-[200px] bg-gradient-to-br from-[#fc4139]/30 to-white rounded-full blur-2xl"></div>
-            <div className="absolute bottom-0 -left-10 w-36 h-36 md:w-[180px] md:h-[180px] bg-gradient-to-tl from-[#10211e]/10 to-[#fc4139]/20 rounded-full blur-2xl"></div>
-
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.6 }}
-            >
-              <Image
-                src="/heroIllustration.jpg"
-                alt="Startup pitching"
-                width={500}
-                height={500}
-                className="relative z-10 w-full max-w-xs sm:max-w-md md:max-w-lg rounded-tl-3xl rounded-br-3xl shadow-xl"
-              />
-            </motion.div>
-          </div>
+      {/* STATS */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.7, duration: 0.6 }}
+        className="flex flex-wrap gap-10 mt-12"
+      >
+        <div>
+          <p className="text-2xl font-bold text-[#fc4139]">5000+</p>
+          <p className="text-gray-500 text-sm">Startups</p>
         </div>
-      </section>
+        <div>
+          <p className="text-2xl font-bold text-[#fc4139]">200+</p>
+          <p className="text-gray-500 text-sm">Investors</p>
+        </div>
+        <div>
+          <p className="text-2xl font-bold text-[#fc4139]">10K+</p>
+          <p className="text-gray-500 text-sm">Community</p>
+        </div>
+      </motion.div>
+    </div>
+
+    {/* RIGHT IMAGE - Ensure this is also relative */}
+    <div className="relative flex justify-center items-center">
+        {/* Glow Effects */}
+      <div className="absolute w-64 h-64 md:w-[420px] md:h-[420px] rounded-full bg-[#fc4139]/20 blur-3xl -z-10"></div>
+      
+      <motion.div
+        initial={{ scale: 0.95, opacity: 0 }}
+        whileInView={{ scale: 1, opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="relative z-10"
+      >
+        <Image
+          src="/heroIllustration.jpg"
+          alt="Startup pitching"
+          width={500}
+          height={500}
+          className="w-full max-w-xs sm:max-w-md md:max-w-lg rounded-tl-3xl rounded-br-3xl shadow-xl"
+        />
+      </motion.div>
+    </div>
+  </div>
+</section>
+
 
       {/* ABOUT KARO PITCH */}
       <section className="py-24 px-6 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
@@ -322,44 +325,54 @@ export default function Home() {
 
       {/* ABOUT KAROSTARTUP */}
       <section className="py-24 bg-gray-50 px-6">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            className="order-2 md:order-1"
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold mb-6">About KaroStartup</h2>
-            <p className="text-gray-600 text-lg leading-relaxed">
-              KaroStartup is a startup media platform sharing founder stories, publishing thousands of startup journeys, and connecting a large community of over 100,000 founders across India.
-            </p>
-            <div className="flex flex-wrap gap-10 mt-8">
-              <div>
-                <p className="text-2xl font-bold text-[#fc4139]">5000+</p>
-                <p className="text-gray-500 text-sm">Startup Stories</p>
-              </div>
-              <div>
-                <p className="text-2xl font-bold text-[#fc4139]">100K+</p>
-                <p className="text-gray-500 text-sm">Community</p>
-              </div>
-            </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <Image
-              src="/karoStartup.avif"
-              alt="KaroStartup community"
-              width={500}
-              height={400}
-              className="rounded-xl shadow-lg"
-            />
-          </motion.div>
-        </div>
+       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+
+  {/* IMAGE */}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.2 }}
+    transition={{ duration: 0.6, delay: 0.1 }}
+    className="order-2 md:order-1 flex justify-center items-center"
+  >
+    <Image
+      src="/karoStartup.avif"
+      alt="KaroStartup community"
+      width={500}
+      height={400}
+      className="rounded-xl shadow-lg"
+    />
+  </motion.div>
+
+  {/* CONTENT */}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount: 0.2 }}
+    transition={{ duration: 0.6 }}
+    className="order-1 md:order-2"
+  >
+    <h2 className="text-3xl sm:text-4xl font-bold mb-6">About KaroStartup</h2>
+
+    <p className="text-gray-600 text-lg leading-relaxed">
+      KaroStartup is a startup media platform sharing founder stories, publishing thousands of startup journeys, and connecting a large community of over 100,000 founders across India.
+    </p>
+
+    <div className="flex flex-wrap gap-10 mt-8">
+      <div>
+        <p className="text-2xl font-bold text-[#fc4139]">5000+</p>
+        <p className="text-gray-500 text-sm">Startup Stories</p>
+      </div>
+
+      <div>
+        <p className="text-2xl font-bold text-[#fc4139]">100K+</p>
+        <p className="text-gray-500 text-sm">Community</p>
+      </div>
+    </div>
+  </motion.div>
+
+
+</div>
       </section>
 
       {/* CTA */}
