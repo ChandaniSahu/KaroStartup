@@ -28,7 +28,7 @@ export default function Home() {
     { id: "karostartup", label: "KaroStartup" },
   ];
 
-  const handleScroll = (id) => {
+  const handleScroll = (id:string) => {
     const element = document.getElementById(id);
     const offset = 90;
 
