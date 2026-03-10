@@ -1,5 +1,5 @@
 "use client";
-
+import { useState , useEffect } from "react";
 import {
   Rocket,
   Users,
@@ -15,6 +15,48 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 
 export default function Home() {
+
+  const [active, setActive] = useState("home");
+
+  const navLinks = [
+    { id: "home", label: "Home" },
+    { id: "about", label: "About" },
+    { id: "how", label: "How it Works" },
+    { id: "categories", label: "Who Can Apply" },
+    { id: "investors", label: "Investors" },
+    { id: "startups", label: "Startups" },
+    { id: "karostartup", label: "KaroStartup" },
+  ];
+
+  const handleScroll = (id) => {
+    const element = document.getElementById(id);
+    const offset = 90;
+
+    if (element) {
+      const y = element.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
+  useEffect(() => {
+    const sections = navLinks.map((link) => document.getElementById(link.id));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(entry.target.id);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+
+    sections.forEach((sec) => sec && observer.observe(sec));
+
+    return () => observer.disconnect();
+  }, []);
+
   const steps = [
     { title: "Apply", description: "Submit your startup pitch.", icon: Rocket },
     { title: "Get Shortlisted", description: "Our team reviews your application.", icon: Target },
@@ -42,13 +84,53 @@ export default function Home() {
 
   return (
     <main className="bg-white text-[#10211e]">
+      {/* NAVBAR */}
+
+<nav className="sticky top-0 z-50 bg-white/80 backdrop-blur border-b border-gray-200">
+  <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+
+    {/* LOGO */}
+    <div
+      onClick={() => handleScroll("home")}
+      className="flex items-center gap-2 cursor-pointer"
+    >
+      <Image
+          src="/logo.svg"
+          alt="Karo Pitch logo"
+          width={40}
+          height={40}
+          
+        />
+      <span className="font-bold text-lg text-[#10211e]">
+        Karo <span className="text-[#fc4139]">Pitch</span>
+      </span>
+    </div>
+
+    {/* LINKS */}
+    <div className="hidden md:flex gap-8 font-medium">
+      {navLinks.map((link) => (
+        <button
+          key={link.id}
+          onClick={() => handleScroll(link.id)}
+          className={`transition ${
+            active === link.id
+              ? "text-[#fc4139]"
+              : "text-gray-600 hover:text-[#fc4139]"
+          }`}
+        >
+          {link.label}
+        </button>
+      ))}
+    </div>
+  </div>
+</nav>
 
       {/* HERO SECTION */}
-<section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 py-20 px-6">
+<section id="home" className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50 pb-20 pt-10 px-6">
   {/* BACKGROUND DECORATIONS - Added z-0 to keep them behind */}
-  <div className="absolute top-20 left-6 w-3 h-3 bg-[#fc4139] rounded-full z-0"></div>
-  <div className="absolute bottom-24 right-6 w-2 h-2 bg-[#10211e] rounded-full z-0"></div>
-  <div className="absolute top-40 right-20 w-3 h-3 bg-orange-300 rounded-full z-0"></div>
+  <div className="absolute top-10 left-6 w-3 h-3 bg-[#fc4139] rounded-full z-0"></div>
+  <div className="absolute bottom-33 right-6 w-2 h-2 bg-[#10211e] rounded-full z-0"></div>
+  <div className="absolute top-22 right-20 w-3 h-3 bg-orange-300 rounded-full z-0"></div>
   <svg className="absolute bottom-0 left-0 w-full opacity-40 z-0" viewBox="0 0 1000 200">
     <path d="M0 150 Q400 0 800 120 T1200 150" stroke="#fc4139" strokeWidth="4" fill="transparent" />
   </svg>
@@ -150,7 +232,7 @@ export default function Home() {
 
 
       {/* ABOUT KARO PITCH */}
-      <section className="py-24 px-6 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <section id="about" className="py-24 px-6 max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -179,7 +261,7 @@ export default function Home() {
       </section>
 
       {/* HOW IT WORKS */}
-      <section className="py-24 bg-gray-50 px-6">
+      <section id="how" className="py-24 bg-gray-50 px-6">
         <div className="max-w-6xl mx-auto text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -215,7 +297,7 @@ export default function Home() {
       </section>
 
       {/* WHO CAN APPLY */}
-      <section className="py-24 px-6 max-w-7xl mx-auto">
+      <section id="categories" className="py-24 px-6 max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -251,7 +333,7 @@ export default function Home() {
       </section>
 
       {/* INVESTORS */}
-      <section className="py-24 bg-gray-50 px-6 text-center">
+      <section id="investors" className="py-24 bg-gray-50 px-6 text-center">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -292,7 +374,7 @@ export default function Home() {
       </section>
 
       {/* FEATURED STARTUPS */}
-      <section className="py-24 px-6 max-w-6xl mx-auto">
+      <section id="startups" className="py-24 px-6 max-w-6xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -324,7 +406,7 @@ export default function Home() {
       </section>
 
       {/* ABOUT KAROSTARTUP */}
-      <section className="py-24 bg-gray-50 px-6">
+      <section id="karostartup" className="py-24 bg-gray-50 px-6">
        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
   {/* IMAGE */}
